@@ -6,10 +6,17 @@ import json
 from gog import Game
 
 class Gog:
+    """A class containing a list of all the games you own on GOG.com."""
+
     def __init__(self, url_opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar())), email, password):
+        """Constructs a GOG by making an HTTP request to GOG.com and logging in with the given email and password.
+        email -- The email the user used to sign up for GOG.com.
+        password -- The password to use when logging into GOG.com to get your list of games.
+        url_opener -- Something we can use to make HTTP requests to GOG.com.  This needs to have some kind of cookie processing since GOG.com needs you to use a cookie to maintain your session."""
+
         self.url_opener = url_opener
         
-        # Request the token
+        # Request the token. The token is probably used by GOG to prevent CSRFs.
         buk = json.loads(self.url_opener.open("http://www.gog.com/user/ajax", "a=get").read())["buk"]
         data = urllib.urlencode(
             {'log_password':password,
