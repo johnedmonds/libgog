@@ -8,7 +8,7 @@ from gog import Game
 class Gog:
     """A class containing a list of all the games you own on GOG.com."""
 
-    def __init__(self, url_opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar())), email, password):
+    def __init__(self, email, password, url_opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))):
         """Constructs a GOG by making an HTTP request to GOG.com and logging in with the given email and password.
         email -- The email the user used to sign up for GOG.com.
         password -- The password to use when logging into GOG.com to get your list of games.
